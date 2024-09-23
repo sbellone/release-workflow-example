@@ -1,0 +1,7 @@
+{
+    "name": "release-workflow-example",
+    "version": "0.0.0",
+    "dependencies": {
+        "libsodium-wrappers": "0.7.15"
+    }
+}
