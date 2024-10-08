@@ -23,11 +23,11 @@ After some PRs have been merged into `develop`, a [GitHub Action](.github/workfl
 ## Setup
 ### How to setup the action to bypass branches protection
 
-To bypass branches protection from a GitHub action:
-- Create a [deploy key](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/managing-deploy-keys) with write permissions
+To bypass rulesets protection from a GitHub action:
+- Create a [deploy key](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/managing-deploy-keys#deploy-keys) with write permissions
 - Save the private SSH key in a `DEPLOY_KEY` [secret](https://docs.github.com/en/actions/security-for-github-actions/security-guides/using-secrets-in-github-actions)
 - Add `Deploy keys` to the Bypass list of the rulesets (Bypass list > Add bypass > Deploy keys)
-- Make your action checkouts the repo [using the SSH key from the secret](.github/workflows/release.yml#24)
+- Make your action checkouts the repo [using the SSH key from the secret](.github/workflows/release.yml#L25)
 
 ### Rotate the deploy key
 #### Manually
@@ -40,8 +40,9 @@ To bypass branches protection from a GitHub action:
 
 Prerequisites:
 - Node.js
+- `jq`
 - [GitHub CLI](https://cli.github.com/)
 
 ```
-./rotate-deploy-key.sh
+./rotate-deploy-key.sh <owner> <repo>
 ```
