@@ -2,8 +2,13 @@
 
 set -e
 
-OWNER=sbellone
-REPO=release-workflow-example
+if [ "$#" -ne 2 ];then
+  echo "Usage: ./rotate-deploy-key.sh <owner> <repo>"
+  exit 0
+fi
+
+OWNER=$1
+REPO=$2
 PRIVATE_KEY_FILE=/tmp/gh_deploy_key_${REPO}
 
 echo "Fetching public key of repo ${OWNER}/${REPO}..."
