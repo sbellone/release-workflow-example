@@ -1,6 +1,6 @@
 {
     "name": "release-workflow-example",
-    "version": "0.0.2",
+    "version": "0.0.3",
     "dependencies": {
         "libsodium-wrappers": "0.7.15"
     }
