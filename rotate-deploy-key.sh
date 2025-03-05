@@ -36,4 +36,4 @@ gh api \
   -f "encrypted_value=${ENCRYPTED_KEY}" -f "key_id=${PUBLIC_KEY_ID}"
 
 echo "Done."
-echo "You can remove the old deploy key and the generated SSH key (${PRIVATE_KEY_FILE})."
+echo "You can remove the old deploy key from GitHub and the generated SSH key (${PRIVATE_KEY_FILE})."
