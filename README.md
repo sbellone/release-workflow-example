@@ -1,6 +1,7 @@
 # Release workflow example
 
 This repository is an example of a release workflow using GitHub Actions and branches protection.
+The Action uses deploy keys to merge and tag releases on the protected main branch.
 
 It has 2 permanent branches:
 - `main`, the default branch, protected with the following [rulesets](https://docs.github.com/en/repositories/configuring-branches-and-merges-in-your-repository/managing-rulesets/about-rulesets):
@@ -24,12 +25,13 @@ After some PRs have been merged into `develop`, a [GitHub Action](.github/workfl
 ### How to setup the action to bypass branches protection
 
 To bypass rulesets protection from a GitHub action:
-- Create a [deploy key](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/managing-deploy-keys#deploy-keys) with write permissions
+- [Create a deploy key](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/managing-deploy-keys#set-up-deploy-keys) with write permissions
+  - The SSH Key has to be created with an empty passphrase: `ssh-keygen -t ed25519 -C "github-actions@github.com" -N ""`
 - Save the private SSH key in a `DEPLOY_KEY` [secret](https://docs.github.com/en/actions/security-for-github-actions/security-guides/using-secrets-in-github-actions)
 - Add `Deploy keys` to the Bypass list of the rulesets (Bypass list > Add bypass > Deploy keys)
 - Make your action checkouts the repo [using the SSH key from the secret](.github/workflows/release.yml#L25)
 
-### Rotate the deploy key
+### Create / rotate the deploy key
 #### Manually
 
 - [Create a deploy key](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/managing-deploy-keys#set-up-deploy-keys) with write permissions.
