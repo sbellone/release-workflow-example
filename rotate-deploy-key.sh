@@ -2,7 +2,10 @@
 
 set -e
 
-if [ "$#" -ne 2 ];then
+SCRIPT_DIRECTORY="$(cd "$(dirname "${BASH_SOURCE[0]}")" >/dev/null 2>&1 && pwd)"
+readonly SCRIPT_DIRECTORY
+
+if [ "$#" -ne 2 ]; then
   echo "Usage: ./rotate-deploy-key.sh <owner> <repo>"
   exit 0
 fi
@@ -21,7 +24,7 @@ ssh-keygen -t ed25519 -C "github-actions@github.com" -f ${PRIVATE_KEY_FILE} -N "
 
 echo "Encrypting private key using public key (id=${PUBLIC_KEY_ID})..."
 npm install --silent
-ENCRYPTED_KEY=$(node encrypt-deploy-key.js ${PUBLIC_KEY} ${PRIVATE_KEY_FILE})
+ENCRYPTED_KEY="$(node "${SCRIPT_DIRECTORY}/encrypt-deploy-key.js" "${PUBLIC_KEY}" "${PRIVATE_KEY_FILE}")"
 
 echo "Creating \"generated-deploy-key\" deploy key..."
 gh api \
